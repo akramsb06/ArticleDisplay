@@ -4,7 +4,9 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
+        <link rel="stylesheet" href="{{ asset('css/welcome.css') }}">
         <title>Articles</title>
+
 
     </head>
 
@@ -12,7 +14,11 @@
         
         <div class="container">
 
-            <div style="color: red;">
+            <a href="{{ route('dashboard') }}">
+                    <button type="submit" id="show_dashboard" class="account-button">My Account</button>
+            </a>
+
+            <div >
 
                 <h1>Create an article</h1><br><br>
 
@@ -28,11 +34,9 @@
 
                 </form>
 
-                <a href="{{ route('showArticles') }}">
+                <a href="{{ route('showArticles') }}" >
                         <button type = "submit" id="show_articles">show articles</button>
                 </a>
-
-            
 
                 
             </div>        

@@ -4,11 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Article</title>
+    <link rel="stylesheet" href="{{ asset('css/edite_article.css') }}">
 </head>
 <body>
-    <h1>Edit Article</h1>
+    <div class="navbar">
 
-    <form method="POST" action="{{ route('updateArticle', $article->id) }}">
+        <a href="{{ url('/') }}" class="home-link">Back to Home</a>
+        <a href="{{ route('showArticles') }}" class="articles-link">Back to All Articles</a>
+    </div>
+    
+    <div class="container"> 
+        
+        <h1>Edit Article</h1>
+
+        <form method="POST" action="{{ route('updateArticle', $article->id) }}">
         {{ csrf_field() }}
         {{ method_field('PUT') }} <!-- we use PUT for updating the article -->
 
@@ -18,10 +27,13 @@
         <label for="content">Content</label>
         <textarea id="content" name="content">{{ $article->content }}</textarea><br><br>
 
-        <button type="submit">Update Article</button>
-    </form>
+        <button type="submit">Update</button>
+        </form>
 
-    <br>
-    <a href="{{ route('showArticles') }}">Back to All Articles</a>
+    </div>
+   
+
+    
+    
 </body>
 </html>

@@ -1,7 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ArticleController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,19 +15,50 @@ use App\Http\Controllers\ArticleController;
 |
 */
 
+// the main route
 Route::get('/', function () {
     return view('welcome');
 });
 
+// the login route
+Route::get('/login', function () {
+    return view('auth.login');
+})->name('login');
 
-Route::post('/saveArticle', [ArticleController::class, 'saveArticle'])->name('saveArticle');
+// the register route
+Route::get('/register', function () {
+    return view('auth.register');
+})->name('register');
+
+require __DIR__.'/auth.php';
 
 
-Route::get('/showArticles', [ArticleController::class, 'showArticles'])->name('showArticles');
+// the dashboard route
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
 
-Route::post('/deleteArticles', [ArticleController::class, 'deleteArticles'])->name('deleteArticles');
+// authentication middleware to restrict access to authenticated users
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-Route::get('/editeArticle/{id}', [ArticleController::class, 'editeArticle'])->name('editeArticle');
+    
+    // Article routes within the auth middleware to restrict access
+    Route::post('/saveArticle', [ArticleController::class, 'saveArticle'])->name('saveArticle');
 
-Route::put('/updateArticle/{id}', [ArticleController::class, 'updateArticle'])->name('updateArticle');
+
+    Route::get('/showArticles', [ArticleController::class, 'showArticles'])->name('showArticles');
+
+
+    Route::post('/deleteArticles', [ArticleController::class, 'deleteArticles'])->name('deleteArticles');
+
+    Route::get('/editeArticle/{id}', [ArticleController::class, 'editeArticle'])->name('editeArticle');
+
+    Route::put('/updateArticle/{id}', [ArticleController::class, 'updateArticle'])->name('updateArticle');
+
+});
+
+
