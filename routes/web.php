@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 // the main route
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home');
 
 // the login route
 Route::get('/login', function () {
@@ -45,7 +45,6 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    
     // Article routes within the auth middleware to restrict access
     Route::post('/saveArticle', [ArticleController::class, 'saveArticle'])->name('saveArticle');
 

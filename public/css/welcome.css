@@ -59,7 +59,7 @@ button {
     color: white;
     border: none;
     padding: 10px;
-    margin-top: 10px;
+    margin-top: 20px;
     border-radius: 5px;
     cursor: pointer;
     align-self: center;
@@ -71,4 +71,17 @@ button:hover {
 
 a {
     text-decoration: none;
+}
+
+.alert {
+    padding: 15px;
+    margin: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+.alert-success {
+    color: #3c763d;
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
 }

@@ -44,6 +44,8 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerateToken();
 
+
+        // brings you back the login page 
         return redirect('/login');
     }
 }

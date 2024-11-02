@@ -13,16 +13,20 @@ class ArticleController extends Controller
     {
         \Log::info(json_encode($request->all()));// Log the request data(for error handling)
 
+        // create an article
         $article = new Article();
         $article->title = $request->title;
         $article->content = $request->content;
+        // save the article
         $article->save();
-        return redirect('/');   
+        // display confirmation message
+        return redirect('/')->with('success', 'Article created successfully!');   
     }
 
     // function to show all the created articles
     public function showArticles()
     {
+        // display all existing articles
         $articles = Article::all();
         return view('showArticles', compact('articles'));
     }
@@ -32,12 +36,12 @@ class ArticleController extends Controller
     public function deleteArticles(Request $request)
     {
         if ($request->has('article_ids')) {
-        // Delete selected articles
+        // Delete selected articles by there id
         Article::whereIn('id', $request->article_ids)->delete();
     }
 
-    // Redirect to the showArticles route with success message
-    return redirect()->route('showArticles')->with('success', 'Selected articles deleted successfully!');
+    // Redirect to the showArticles route 
+    return redirect()->route('showArticles');
     }
 
 
@@ -52,12 +56,15 @@ class ArticleController extends Controller
     // function to update the selected article
     public function updateArticle(Request $request, $id)
 {
+
     $article = Article::find($id);
     $article->title = $request->title;
     $article->content = $request->content;
+    // save the update
     $article->save();
 
-    return redirect()->route('showArticles')->with('success', 'Article updated successfully!');
+    // redirect to the show articles page 
+    return redirect()->route('showArticles');
 }
 
 

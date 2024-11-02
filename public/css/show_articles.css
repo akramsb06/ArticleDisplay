@@ -12,6 +12,7 @@ body {
     background-color: #333;
     padding: 10px 20px;
     color: white;
+    border-radius: 10px;
 }
 
 .delete-form {
@@ -36,6 +37,17 @@ body {
 }
 
 .home-link:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+.dashboard-link {
+    color: white;
+    text-decoration: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.dashboard-link:hover {
     background-color: rgba(255, 255, 255, 0.2);
 }
 

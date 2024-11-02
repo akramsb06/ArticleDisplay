@@ -21,7 +21,7 @@ class RedirectIfAuthenticated
 
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
-                // return redirect(RouteServiceProvider::HOME);
+                // redirect to the home page after authentication
                 return redirect('/');
             }
         }
